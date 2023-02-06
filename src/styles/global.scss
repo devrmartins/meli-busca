@@ -1,6 +1,7 @@
 :root {
   --primary: #fff159;
   --gray-100: #ededed;
+  --gray-200: #7c7c7c;
   --gray-300: #666;
   --gray-500: #333;
   --blue: ##3483fa;
@@ -9,12 +10,12 @@
 
 @font-face {
   font-family: 'ProximaNovaRegular';
-  src:  url('../fonts/proximanova-regular.woff2') format('woff2');
+  src:  url('fonts/proximanova-regular.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'ProximaNovaLight';
-  src:  url('../fonts/proximanova-light.woff2') format('woff2');
+  src:  url('fonts/proximanova-light.woff2') format('woff2');
 }
 
 @font-face {
@@ -31,6 +32,7 @@
 body {
   background: var(--gray-100);
   color: var(--gray-500);
+  -webkit-font-smoothing: antialiased;
 }
 
 body, input, textarea, button {
@@ -41,5 +43,9 @@ body, input, textarea, button {
 
 a {
   text-decoration: none;
+}
+
+:focus {
+  outline: 0;
 }
 
