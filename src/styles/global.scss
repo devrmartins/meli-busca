@@ -1,0 +1,45 @@
+:root {
+  --primary: #fff159;
+  --gray-100: #ededed;
+  --gray-300: #666;
+  --gray-500: #333;
+  --blue: ##3483fa;
+  --green: #00a650;
+}
+
+@font-face {
+  font-family: 'ProximaNovaRegular';
+  src:  url('../fonts/proximanova-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'ProximaNovaLight';
+  src:  url('../fonts/proximanova-light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'ProximaNovaSemiBold';
+  src:  url('../fonts/proximanova-semibold.woff2') format('woff2');
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--gray-100);
+  color: var(--gray-500);
+}
+
+body, input, textarea, button {
+  font-family: 'ProximaNovaRegular', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
+
