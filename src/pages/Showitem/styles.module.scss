@@ -1,0 +1,89 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+
+  background: var(--white);
+  
+  padding: 2rem;
+  
+
+  .image {
+    flex: 3;
+
+    img {
+      width: 100%;
+    }
+
+    .description {
+      margin-top: 1rem;
+
+      h1 {
+        font-size: 1.5rem;
+        font-family: 'ProximaNovaSemiBold', sans-serif;
+        font-weight: bold;
+        margin-bottom: .5rem;
+      }
+
+      p {
+        font-size: 1rem;
+        line-height: 1.3rem;
+      }
+    }
+  }
+
+  .info {
+    flex: 1;
+
+    &_subtitle {
+      margin-bottom: .5rem;
+    }
+
+    &_title {
+      h1 {
+        font-size: 1.5rem;
+        font-family: 'ProximaNovaSemiBold', sans-serif;
+        font-weight: bold;
+
+        line-height: 1.5rem;
+        word-wrap: break-word;
+        margin-bottom: .5rem;
+      }
+    }
+
+    &_price {
+      span {
+        font-size: 2.2rem;
+        display: block;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    button {
+      background: var(--blue);
+      color: var(--white);
+
+      width: 100%;
+
+      outline: none;
+
+      border: 0;
+      border-radius: 4px;
+
+      padding: .5rem 1rem;
+
+      cursor: pointer;
+
+      transition: all .15s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      
+
+    }
+
+  }
+
+}

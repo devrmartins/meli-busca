@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Truck } from 'phosphor-react';
 import { api } from '../../api';
 
 import styles from './styles.module.scss';
+import { formatNumber } from '../../utils/number-utils';
 
 export function SearchResult() {
+  const navigate = useNavigate();
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
 
@@ -18,12 +21,8 @@ export function SearchResult() {
     }
   }, []);
 
-  function formatNumber(price) {
-    const priceFixed = parseFloat((price/100)).toFixed(2);
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(priceFixed);
+  function handleShowProduct(id) {
+    if (id) navigate(`/items/${id}`);
   }
 
   return (
@@ -31,10 +30,10 @@ export function SearchResult() {
       <ul className={styles.products}>
       {products.map(p => (
         <li key={p.id} className={styles.product}>
-          <div className={styles.product_container}>
+          <div className={styles.product_container} onClick={() => handleShowProduct(p.id)}>
             <img className={styles.product_thumbnail} src={p?.thumbnail} />
             <div className={styles.product_content}>
-              <h2 className={styles.product_price}>{formatNumber(p?.price)} {(p?.shipping?.free_shipping) ? <span className={styles.product_shipping}><Truck size={14} /></span> : 'asdsas'}</h2>
+              <h2 className={styles.product_price}>{formatNumber(p?.price)} {(p?.shipping?.free_shipping) ? <span className={styles.product_shipping}><Truck size={14} /></span> : ''}</h2>
               <p className={styles.product_description}>{p.title}</p>
             </div>
             <span className={styles.product_city}>{p?.address?.city_name}</span>
