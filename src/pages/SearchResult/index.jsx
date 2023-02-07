@@ -15,7 +15,7 @@ export function SearchResult() {
   useEffect(() => {
     const q = searchParams.get("q");
     if (q && q != '') {
-      api.get("", { params: { q, limit: 4 } }).then(response => {
+      api.get("/sites/MLA/search", { params: { q, limit: 4 } }).then(response => {
         if (response?.data?.results) setProducts(response?.data?.results);
       });
     }
