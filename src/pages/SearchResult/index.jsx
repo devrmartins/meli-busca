@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Truck, CaretRight } from "phosphor-react";
+import { Truck } from "phosphor-react";
+import { Breadcrumbs } from "../../components/Breadcrumbs";
 import { api } from "../../api";
+import { formatNumber } from "../../utils/number-utils";
 
 import styles from "./styles.module.scss";
-import { formatNumber } from "../../utils/number-utils";
 
 export function SearchResult() {
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [breadcrumbs, setBreadcrumbs] = useState([]);
 
   useEffect(() => {
     const q = searchParams.get("q");
@@ -19,19 +20,14 @@ export function SearchResult() {
       api
         .get("/sites/MLA/search", { params: { q, limit: 4 } })
         .then((response) => {
-          if (response?.data?.results) {
-            const category = response?.data?.available_filters?.find(
-              (f) => f.id === "category"
-            );
-            if (category) {
-              setCategories(
-                category.values.sort((a, b) =>
-                  a.results > b.results ? -1 : a.results < b.results ? 1 : 0
-                )
-              );
+          if (response?.data?.filters) {
+            const categories = response?.data?.filters.find(f => f.id === 'category');
+            if (categories && categories?.values.length > 0) {
+              setBreadcrumbs(categories?.values[0].path_from_root);
             }
-            setProducts(response?.data?.results);
           }
+
+          if (response?.data?.results) setProducts(response?.data?.results);
         });
     }
   }, []);
@@ -42,18 +38,7 @@ export function SearchResult() {
 
   return (
     <>
-      <div className={styles.breadcrumbs}>
-        <ul>
-          {categories.slice(0, 5).map((c) => (
-            <>
-              <li key={c.id}><a href="#">{c.name}</a></li>
-              <li className={styles.divider}>
-                <CaretRight size={12} />
-              </li>
-            </>
-          ))}
-        </ul>
-      </div>
+      <Breadcrumbs items={breadcrumbs} />
       <div className={styles.container}>
         <ul className={styles.products}>
           {products.map((p) => (
